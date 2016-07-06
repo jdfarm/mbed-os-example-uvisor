@@ -65,6 +65,7 @@
     static const UvisorBoxAclItem acl_list_name[] = { \
         {CMU,  sizeof(*CMU),  UVISOR_TACLDEF_PERIPH}, \
         {GPIO, sizeof(*GPIO), UVISOR_TACLDEF_PERIPH}, \
+        {(void *) 0x42000000, 0x2000000, UVISOR_TACLDEF_PERIPH}, \
     }
 
 #endif /* Target */
