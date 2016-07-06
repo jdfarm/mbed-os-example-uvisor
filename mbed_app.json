@@ -2,7 +2,12 @@
     "custom_targets": {
         "K64F_SECURE": {
             "inherits": ["K64F"],
-            "extra_labels_add":["K64F", "UVISOR_SUPPORTED"],
+            "extra_labels_add": ["K64F", "UVISOR_SUPPORTED"],
+            "features_add": ["UVISOR"]
+        },
+        "EFM32GG_STK3700_SECURE": {
+            "inherits": ["EFM32GG_STK3700"],
+            "extra_labels_add": ["EFM32GG_STK3700", "UVISOR_SUPPORTED"],
             "features_add": ["UVISOR"]
         }
     }
