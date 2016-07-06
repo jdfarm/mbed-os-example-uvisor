@@ -20,6 +20,8 @@
 /* The vector containing the challenge is shared with the push-button ISR, so
  * that it can attempt to access it from an IRQ context. */
 
+#if defined(TARGET_K64F)
+
 #define LED_ON  true
 #define LED_OFF false
 
@@ -47,5 +49,24 @@
         {I2C0,   sizeof(*I2C0),   UVISOR_TACLDEF_PERIPH}, \
         {SPI0,   sizeof(*SPI0),   UVISOR_TACLDEF_PERIPH}, \
     }
+
+#elif defined(TARGET_EFM32GG_STK3700)
+
+#define LED_ON  true
+#define LED_OFF false
+
+#define MAIN_LED LED0
+#define HALT_LED LED1
+
+#define MAIN_BTN      PB0
+#define MAIN_BTN_PUPD PullUp
+
+#define MAIN_ACL(acl_list_name) \
+    static const UvisorBoxAclItem acl_list_name[] = { \
+        {CMU,  sizeof(*CMU),  UVISOR_TACLDEF_PERIPH}, \
+        {GPIO, sizeof(*GPIO), UVISOR_TACLDEF_PERIPH}, \
+    }
+
+#endif /* Target */
 
 #endif /* __UVISOR_HELLOWORLD_MAIN_HW_H__ */
