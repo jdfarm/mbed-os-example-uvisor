@@ -28,9 +28,6 @@
 #define MAIN_LED LED_BLUE
 #define HALT_LED LED_RED
 
-#define MAIN_BTN SW2
-#define MAIN_BTN_PUPD PullUp
-
 #define MAIN_ACL(acl_list_name) \
     static const UvisorBoxAclItem acl_list_name[] = {     \
         {SIM,    sizeof(*SIM),    UVISOR_TACLDEF_PERIPH}, \
@@ -57,9 +54,6 @@
 
 #define MAIN_LED LED0
 #define HALT_LED LED1
-
-#define MAIN_BTN      PB0
-#define MAIN_BTN_PUPD PullUp
 
 #define MAIN_ACL(acl_list_name) \
     static const UvisorBoxAclItem acl_list_name[] = { \
