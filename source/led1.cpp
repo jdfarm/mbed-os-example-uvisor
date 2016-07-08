@@ -1,4 +1,3 @@
-#include "fun_bag.h"
 #include "uvisor-lib/uvisor-lib.h"
 #include "mbed.h"
 #include "rtos.h"
@@ -16,24 +15,17 @@ static void led1_main(const void *);
 
 UVISOR_BOX_NAMESPACE(NULL);
 UVISOR_BOX_HEAPSIZE(2048);
-UVISOR_BOX_MAIN(led1_main, osPriorityNormal, 512);
-UVISOR_BOX_CONFIG(box_led1, acl, 512, box_context);
+UVISOR_BOX_MAIN(led1_main, osPriorityNormal, 1024);
+UVISOR_BOX_CONFIG(box_led1, acl, 1024, box_context);
 
 static void led1_main(const void *)
 {
     DigitalOut led1(LED1);
     led1 = LED_OFF;
-    const uint32_t kB = 1024;
-
-    SecureAllocator alloc = secure_allocator_create_with_pages(4*kB, 1*kB);
 
     while (1) {
-        static const size_t size = 500;
-        uint16_t seed = (size << 8) | (uvisor_ctx->heartbeat & 0xFF);
-
         led1 = !led1;
         ++uvisor_ctx->heartbeat;
-        alloc_fill_wait_verify_free(size, seed, 211);
-        specific_alloc_fill_wait_verify_free(alloc, 5*kB, seed, 107);
+        for (int i = 0; i < 0x100000; i++);
     }
 }

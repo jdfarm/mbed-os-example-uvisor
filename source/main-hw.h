@@ -57,9 +57,13 @@
 
 #define MAIN_ACL(acl_list_name) \
     static const UvisorBoxAclItem acl_list_name[] = { \
-        {CMU,  sizeof(*CMU),  UVISOR_TACLDEF_PERIPH}, \
-        {GPIO, sizeof(*GPIO), UVISOR_TACLDEF_PERIPH}, \
-        {(void *) 0x42000000, 0x2000000, UVISOR_TACLDEF_PERIPH}, \
+        {CMU,                 sizeof(*CMU),    UVISOR_TACLDEF_PERIPH}, \
+        {MSC,                 sizeof(*MSC),    UVISOR_TACLDEF_PERIPH}, \
+        {GPIO,                sizeof(*GPIO),   UVISOR_TACLDEF_PERIPH}, \
+        {TIMER0,              sizeof(*TIMER0), UVISOR_TACLDEF_PERIPH}, \
+        {UART0,               sizeof(*UART0),  UVISOR_TACLDEF_PERIPH}, \
+        {(void *) 0x0FE08000, 0x1000,          UVISOR_TACLDEF_PERIPH}, \
+        {(void *) 0x42000000, 0x2000000,       UVISOR_TACLDEF_PERIPH}, \
     }
 
 #endif /* Target */
