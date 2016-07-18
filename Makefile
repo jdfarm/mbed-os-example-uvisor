@@ -23,6 +23,7 @@ APP:=mbed-os-example-uvisor
 PREFIX:=arm-none-eabi-
 GDB:=$(PREFIX)gdb
 OBJDUMP:=$(PREFIX)objdump
+NM:=$(PREFIX)nm
 
 ifeq ("$(MBED_TARGET)","")
 	MBED_TARGET:=K64F_SECURE
@@ -111,8 +112,9 @@ release:
 
 objdump: $(TARGET_ASM)
 
-$(TARGET_ASM): $(TARGET_ELF)
-	$(OBJDUMP) -D $^ > $@
+$(TARGET_ASM): $(TARGET_ELF) $(DEBUG_ELF)
+	$(OBJDUMP) -wSd -j .text -Mforce-thumb $(DEBUG_ELF) > $@ 
+	$(OBJDUMP) -wSd -j .text -Mforce-thumb --start-address=0x$$($(NM) $(TARGET_ELF) | grep ' uvisor_config$$' | cut -d\  -f1) $(TARGET_ELF) >> $@
 
 gdbserver:
 	$(JLINK_SERVER) $(JLINK_CFG)
