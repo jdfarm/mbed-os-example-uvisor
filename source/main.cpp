@@ -45,3 +45,7 @@ int main(void)
 
     return 0;
 }
+
+void mbed_sdk_init(void) {
+	
+}
