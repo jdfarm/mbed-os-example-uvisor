@@ -24,6 +24,11 @@ static void led1_main(const void *)
     led1 = LED_OFF;
 
     while (1) {
+		if (led1) {
+			printf("LED off : _\n");
+		} else {
+			printf("LED on  : #\n");
+		}
         led1 = !led1;
         ++uvisor_ctx->heartbeat;
         for (int i = 0; i < 0x100000; i++);
